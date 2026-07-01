@@ -222,6 +222,9 @@
 - `@nocobase/server: 2.x`
 - `@nocobase/test: 2.x`
 
+`dependencies`：
+
+- `swiper: ^12.1.3`
 
 ## 已实现能力总结
 

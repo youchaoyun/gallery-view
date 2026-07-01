@@ -222,6 +222,10 @@ The plugin declares the following `peerDependencies`:
 - `@nocobase/server: 2.x`
 - `@nocobase/test: 2.x`
 
+`dependencies`：
+
+- `swiper: ^12.1.3`
+
 ## Summary of Implemented Capabilities
 
 The capabilities implemented and reflected in this README include:
