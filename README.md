@@ -1,103 +1,107 @@
 # @youchaoyun/plugin-gallery-view
 
-`@youchaoyun/plugin-gallery-view` 是一个 NocoBase 画廊视图区块插件，用于将多条数据记录以图片卡片轮播的方式进行展示，适合产品展示、案例展示、作品集浏览、图文内容导览等场景。
+English | [简体中文](./README.zh-CN.md)
 
-当前版本支持 `Effect cover flow`、`Thumbs`、`Vertical` 三种展示模式，并支持点击条目后打开记录详情弹窗。
+</div>
 
-## 功能特性
+`@youchaoyun/plugin-gallery-view` is a NocoBase gallery view block plugin used to display multiple data records as image card carousels. It is suitable for product showcases, case studies, portfolio browsing, image-text content navigation, and similar scenarios.
 
-- 支持三种画廊布局模式
+The current version supports three display modes: `Effect cover flow`, `Thumbs`, and `Vertical`, and supports opening a record detail popup after clicking an item.
+
+## Features
+
+- Supports three gallery layout modes
   - `Effect cover flow`
   - `Thumbs`
   - `Vertical`
-- 支持封面、标题、简介字段映射
-- 支持附件字段作为封面图来源
-- 支持关联字段封面自动补充查询 `appends`
-- 支持外观配置
-  - 卡片间距
-  - 显示数量
-  - 图片适应方式
-  - 轮播间隔
-- 支持恢复默认外观参数
-- 支持容器尺寸较小时自动进入紧凑布局
-  - 自动隐藏简介
-  - 自动调整可见卡片数量与间距
-  - 占位图在小尺寸下自动隐藏文案
-- 支持点击条目后通过 `openView` 打开详情弹窗
-- 支持无数据源时使用内置假数据预览
-- 支持其他插件扩展可用于 `Cover field` 的字段接口
+- Supports field mapping for cover, title, and description
+- Supports attachment fields as cover image sources
+- Supports automatically appending query `appends` for relation-based cover fields
+- Supports appearance configuration
+  - Card gap
+  - Display count
+  - Image fit
+  - Carousel interval
+- Supports restoring default appearance settings
+- Supports automatically switching to compact layout when the container size becomes smaller
+  - Automatically hides descriptions
+  - Automatically adjusts visible card count and spacing
+  - Placeholder text is automatically hidden in smaller sizes
+- Supports opening the detail popup through `openView` after clicking an item
+- Supports using built-in mock data preview when no data source is configured
+- Supports other plugins extending field interfaces available for `Cover field`
 
-## 适用场景
+## Applicable Scenarios
 
-- 产品画册展示
-- 作品集轮播浏览
-- 图文案例列表展示
-- 轮播式内容导览
-- 带封面图的多记录可视化展示
+- Product gallery display
+- Portfolio carousel browsing
+- Image-text case list display
+- Carousel-style content navigation
+- Multi-record visual display with cover images
 
-## 区块说明
+## Block Description
 
-插件注册了一个区块：
+The plugin registers one block:
 
-- 区块名称：`Gallery view`
-- 中文名称：`画廊视图`
+- Block name: `Gallery view`
+- Chinese label: `画廊视图`
 
-该区块面向多条记录数据进行展示，会按当前数据源查询结果渲染画廊内容。
+This block is used to display multiple data records and renders gallery content based on the current query result of the selected data source.
 
-## 配置说明
+## Configuration
 
-画廊视图区块主要包含以下配置分组。
+The gallery view block mainly includes the following configuration groups.
 
-### 1. 字段映射
+### 1. Field mapping
 
-用于指定画廊展示所需的字段来源。
+Used to specify the field sources required for gallery display.
 
-基础字段：
+Basic fields:
 
 - `Cover field`
-  - 用于显示每条记录的封面图片
-  - 默认支持附件字段
-  - 当字段为关联字段时，会自动补充资源查询所需的 `appends`
+  - Used to display the cover image of each record
+  - Supports attachment fields by default
+  - When the field is a relation field, the required resource query `appends` are automatically added
 - `Title field`
-  - 用于显示画廊标题
+  - Used to display the gallery title
 - `Description field`
-  - 用于显示画廊简介内容
+  - Used to display the gallery description content
 
-说明：
+Notes:
 
-- 字段映射支持 `ctx.collection.xxx` 形式的变量表达式
-- 封面字段值支持数组、对象或字符串形式的图片地址读取
-- 当未读取到封面图时，会显示占位图
+- Field mapping supports variable expressions in the `ctx.collection.xxx` format
+- Cover field values support reading image addresses from arrays, objects, or strings
+- When no cover image is found, a placeholder image is displayed
 
-### 2. 外观
+### 2. Appearance
 
-用于控制画廊的视觉样式和轮播行为。
+Used to control the visual style and carousel behavior of the gallery.
 
 - `Layout mode`
-  - 控制画廊布局模式
-  - 可选值：
+  - Controls the gallery layout mode
+  - Available values:
     - `Effect cover flow`
     - `Thumbs`
     - `Vertical`
 - `Card gap`
-  - 控制卡片之间的间距
+  - Controls the spacing between cards
 - `Display count`
-  - 控制默认展示数量
-  - 当区块过窄或过矮时，插件会优先保证图片展示效果，不一定严格等于该值
+  - Controls the default number of visible items
+  - When the block is too narrow or too short, the plugin prioritizes image presentation, so the actual value may not strictly match this setting
 - `Image fit`
-  - 控制图片填充方式
-  - 可选值：
+  - Controls how the image fills the card
+  - Available values:
     - `cover`
     - `contain`
     - `fill`
     - `none`
 - `Carousel interval`
-  - 控制自动轮播间隔
-  - `0` 表示关闭自动轮播
+  - Controls the autoplay interval
+  - `0` means autoplay is disabled
 - `Restore default`
-  - 一键恢复默认外观参数
+  - Restores the default appearance settings with one click
 
-默认外观参数：
+Default appearance settings:
 
 ```ts
 {
@@ -109,168 +113,151 @@
 }
 ```
 
-## 布局模式说明
+## Layout Mode Description
 
 ### Effect cover flow
 
-该模式使用封面流效果展示当前画廊内容，适合强调视觉中心图的展示场景。
+This mode uses a cover flow effect to display the current gallery content and is suitable for scenarios that emphasize the central visual item.
 
-当前具备以下表现：
+Current behavior:
 
-- 中间卡片高亮显示
-- 支持自动轮播
-- 支持点击下方图文信息区域打开详情弹窗
-- 当区块高度较小时自动进入紧凑模式
-  - 减少可见卡片数
-  - 缩小卡片间距
-  - 隐藏简介内容
+- The center card is highlighted
+- Supports autoplay
+- Supports clicking the image-text information area below to open the detail popup
+- Automatically switches to compact mode when the block height becomes smaller
+  - Reduces the number of visible cards
+  - Shrinks card spacing
+  - Hides description content
 
 ### Thumbs
 
-该模式由主图区域和底部缩略图区域组成，适合需要快速切换浏览图片的场景。
+This mode consists of a main image area and a bottom thumbnail area, and is suitable for scenarios where users need to switch images quickly while browsing.
 
-当前具备以下表现：
+Current behavior:
 
-- 主图支持轮播切换
-- 底部缩略图支持联动定位
-- 主图覆盖标题与简介信息
-- 点击主图卡片可打开详情弹窗
+- The main image supports carousel switching
+- The bottom thumbnails support linked positioning
+- The main image overlays title and description information
+- Clicking the main image card opens the detail popup
 
 ### Vertical
 
-该模式以竖向轮播卡片的形式展示多条记录，适合在较高区域内连续浏览内容。
+This mode displays multiple records as vertically scrolling carousel cards and is suitable for continuous browsing in taller areas.
 
-当前具备以下表现：
+Current behavior:
 
-- 竖向滚动轮播
-- 支持鼠标滚轮切换
-- 卡片封面图上叠加标题和简介
-- 点击卡片可打开详情弹窗
-- 在较小高度下自动切换为紧凑布局
+- Vertical scrolling carousel
+- Supports mouse wheel switching
+- Title and description are overlaid on the card cover image
+- Clicking the card opens the detail popup
+- Automatically switches to compact layout when the height becomes smaller
 
-## 条目点击交互
+## Item Click Interaction
 
-插件注册了条目点击事件：
+The plugin registers an item click event:
 
-- 事件名：`itemClick`
+- Event name: `itemClick`
 
-默认内置了一个 `popupSettings` 流程，并在点击条目时使用 `openView` 打开详情弹窗。
+By default, a built-in `popupSettings` flow is provided, and `openView` is used to open the detail popup when an item is clicked.
 
-说明：
+Notes:
 
-- 点击画廊条目时，会根据当前记录主键生成 `filterByTk`
-- 弹窗默认关闭路由跳转，避免二次进入时无法重新触发弹窗事件
+- When a gallery item is clicked, `filterByTk` is generated based on the current record primary key
+- Route navigation is disabled in the popup by default to avoid failing to trigger the popup event again on repeated entry
 
-## 效果预览
+## Preview
 
-### Effect cover flow 示例
+### Effect cover flow Example
 
-![Effect cover flow 示例](docs/image.png)
+![Effect cover flow Example](docs/image.png)
 
-### Thumbs 示例
+### Thumbs Example
 
-![Thumbs 示例](docs/image-1.png)
+![Thumbs Example](docs/image-1.png)
 
-### Vertical 示例
+### Vertical Example
 
-![Vertical 示例](docs/image-2.png)
+![Vertical Example](docs/image-2.png)
 
-### 画廊设置示例
+### Gallery Settings Example
 
-![画廊设置示例](docs/image-3.png)
+![Gallery Settings Example](docs/image-3.png)
 
-## 无数据源时的预览
+## Preview Without a Data Source
 
-如果区块尚未配置数据源，插件会使用内置假数据进行展示，方便在配置态下预览样式。
+If the block has not been configured with a data source yet, the plugin uses built-in mock data for display so the style can be previewed in design mode.
 
-默认假数据包含：
+The default mock data includes:
 
 - `title`
 - `description`
 - `cover`
 
-## 扩展能力
+## Extensibility
 
-插件默认仅将 `attachment` 作为 `Cover field` 可选字段接口。
+By default, the plugin only treats `attachment` as an available field interface for `Cover field`.
 
-如果其他插件需要扩展可作为封面字段的接口类型，可通过客户端插件实例调用：
+If other plugins need to extend the interface types that can be used as cover fields, they can call the client plugin instance:
 
-```ts
-plugin.registerGalleryCoverFieldInterfaces(['multipleEntryModesAttachment']);
+```typescript
+// In client/plugin.tsx, multipleEntryModesAttachment is the type to register.
+  const galleryViewPlugin = this.app.pm.get<any>('@youchaoyun/plugin-gallery-view');
+  galleryViewPlugin?.registerGalleryCoverFieldInterfaces?.(['multipleEntryModesAttachment']);
 ```
 
-说明：
+Notes:
 
-- 内部会自动去重
-- 已注册接口会参与 `Cover field` 字段选择范围
+- Duplicate registrations are removed automatically internally
+- Registered interfaces participate in the available selection range of `Cover field`
 
-## 依赖要求
+## Dependency Requirements
 
-插件声明了以下依赖：
+The plugin declares the following dependency:
 
 - `swiper`
 
-插件声明了以下 `peerDependencies`：
+The plugin declares the following `peerDependencies`:
 
 - `@nocobase/client: 2.x`
 - `@nocobase/server: 2.x`
 - `@nocobase/test: 2.x`
 
-## 目录结构
+## Summary of Implemented Capabilities
 
-```text
-plugin-gallery-view/
-├─ src/
-│  ├─ client/
-│  │  ├─ GalleryView.tsx
-│  │  ├─ EffectCoverFlowGallery.tsx
-│  │  ├─ ThumbsGallery.tsx
-│  │  ├─ VerticalCarouselGallery.tsx
-│  │  ├─ galleryCompactLayout.ts
-│  │  ├─ galleryCoverFieldResource.ts
-│  │  ├─ coverFieldInterfaces.ts
-│  │  ├─ models/
-│  │  │  └─ GalleryViewModel.tsx
-│  │  └─ __tests__/
-│  └─ locale/
-├─ package.json
-└─ README.md
-```
+The capabilities implemented and reflected in this README include:
 
-## 已实现能力总结
+- Gallery view block registration
+- Field mapping for cover, title, and description
+- Switching between three layout modes
+- Autoplay configuration
+- Image fit configuration
+- Compact layout adaptation
+- Adaptive hiding of placeholder text
+- Automatic query appending for relation-based cover fields
+- Item click popup
+- Preview without a data source
+- Cover field interface extension registration
 
-当前 README 对应的实现能力包括：
+## Notes
 
-- 画廊视图区块注册
-- 封面、标题、简介字段映射
-- 三种布局模式切换
-- 自动轮播配置
-- 图片填充方式配置
-- 紧凑布局自适应
-- 占位图文案自适应隐藏
-- 关联字段封面自动补充查询
-- 点击条目弹窗
-- 无数据源预览
-- 封面字段接口扩展注册
+- `Cover field` supports attachment fields by default; other field interfaces need to be registered separately
+- When the cover field is mapped to a relation field, the plugin automatically appends resource query fields and refreshes the resource
+- `Display count` is automatically adjusted based on container size in compact layout, and may not strictly follow the configured value
+- When the block height or width becomes smaller, the plugin automatically hides part of the description to prioritize image presentation
+- `Carousel interval` set to `0` disables autoplay
 
-## 注意事项
+## Community And Documentation
 
-- `Cover field` 默认支持附件字段，其他字段接口需要额外注册
-- 当封面字段映射到关联字段时，插件会自动追加资源查询字段并刷新数据
-- `Display count` 在紧凑布局下会根据容器尺寸自动调整，不一定严格按照配置值展示
-- 当区块高度或宽度较小时，插件会自动隐藏部分描述信息，以优先保证图片展示效果
-- `Carousel interval` 设置为 `0` 时不会自动轮播
+### Noco Plugin Community
 
-## 交流与文档
+You are welcome to scan the QR code to join the Noco plugin community for discussions about NocoBase plugin development, plugin usage, and enterprise extension practices.
 
-### Noco 插件交流
+![Noco Plugin Community](docs/wxchat.png)
 
-下图为 `Noco 插件交流` 群入口，可用于插件使用交流、问题反馈与功能讨论。
+If the QR code has expired, you can use the "More Plugins" page below to contact us for the latest community entry.
 
-![Noco 插件交流](docs/wxchat.png)
+## More Plugins
 
-### 有巢数智外部文档
+Youchao Digital Intelligence continues to build enterprise-grade NocoBase plugins and extension capabilities. For more plugins, please see:
 
-以下地址为 `有巢数智` 的外部文档入口，可用于查看相关产品与平台说明文档：
-
-https://docs.youchaoyun.com/cn/infrastructure/
+[More NocoBase Plugin Extensions](https://docs.youchaoyun.com/cn/infrastructure/nocobase_plugin_extension/)
